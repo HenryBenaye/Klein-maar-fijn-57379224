@@ -1,15 +1,47 @@
 <?php
 
 $change = (float)$argv[1];
-define("GELDEENHEDEN", [50 , 20, 10, 5, 2, 1, 0.50, 0.20, 0.10, 0.05, 0.02, 0.01]);
+
+define("EUROS", 
+        [50 => "euro", 
+        20 => "euro", 
+        10 => "euro", 
+        5 => "euro", 
+        2 => "euro", 
+        1 => "euro"]);
+
+define("CENTEN", 
+        [50 => "cent", 
+        20 => "cent",
+        10 => "cent", 
+        5 => "cent", 
+        2 => "cent", 
+        1 => "cent"]);
+
+$heleEuros = floor($change);
+$heleCenten = ($change - $heleEuros) * 100;
 
 
-foreach(GELDEENHEDEN as $munt){
-    $munt = (float)$munt;
-    if(floor($change / $munt) > 0){
-        $times =  floor($change / $munt);
-        echo "$times X $munt" . PHP_EOL;
-        $change = $change - ($times * $munt);
 
+ foreach(EUROS as $euro => $type1){
+    
+     $heleEuros = round($heleEuros,2);
+     if(floor($heleEuros / $euro) > 0){
+         $times =  floor($heleEuros / $euro);
+         echo "$times X $euro" ."euro". PHP_EOL;
+         $heleEuros = $heleEuros - ($times * $euro);
+ 
+     }
+
+}
+
+foreach (CENTEN as $cent => $type2){
+    $heleCenten = round($heleCenten,2);
+    if(floor($heleCenten/ $cent) > 0){
+        $times =  floor($heleCenten / $cent);
+        echo "$times X $cent" . "cent".PHP_EOL;
+        $heleCenten = $heleCenten - ($times * $cent);
     }
 }
+
+   
